@@ -28,6 +28,23 @@ hubChannel.sendMessage({ cmd: "seatLock", on: true }, "classroom")
 Receiver rule: act only if `presence.state[session_id].metas[0].roles` has `owner` or
 `creator`, or the sender has `amplify_audio` / `mute_users` permission. Otherwise ignore it.
 
+## Developing in Codespaces
+
+On GitHub, choose **Code → Codespaces → Create codespace on `classroom`**. This needs a 4-core machine, and dependencies install automatically.
+
+| Command | What it gives you |
+| :--- | :--- |
+| `npm run storybook` | Storybook on port 6006. **Build the Teacher HUD here**, in isolation and without a server. |
+| `npm run test` | Lint + unit tests |
+| `npm run build` | Production build (the same as CI) |
+
+Voice and multi-user testing need the full stack, which comes in Phase 1 on our own server. Codespaces cannot carry WebRTC voice.
+
+## CI
+
+`.github/workflows/classroom-build.yml` builds the client image on every push to `classroom` and publishes it as
+`ghcr.io/ben010618/hubs:classroom-latest` (also tagged with `classroom-<run>`).
+
 ## Known gaps (to build)
 
 - Teacher HUD panel (one place for all controls)
